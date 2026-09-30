@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untuk Kakak</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Special+Elite&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #d8ceb9;
+      background-image: 
+        radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px),
+        linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px);
+      background-size: 20px 20px, 30px 30px;
+    }
+    .font-newspaper-title { font-family: 'Playfair Display', serif; }
+    .font-newspaper-body { font-family: 'Special Elite', monospace; }
+    
+    .paper-card {
+      background: #f4efe2;
+      box-shadow: 0 10px 25px -5px rgba(60, 40, 20, 0.25), 0 8px 10px -6px rgba(60, 40, 20, 0.2);
+      border: 1px solid #c8beaa;
+    }
+
+    .chat-bubble-newspaper {
+      background-color: #eaddca;
+      border: 2px solid #5c4d3c;
+      box-shadow: 3px 3px 0px #5c4d3c;
+    }
+
+    .btn-newspaper {
+      background-color: #2c221e;
+      color: #f4efe2;
+      transition: all 0.2s ease;
+      box-shadow: 3px 3px 0px #5c4d3c;
+    }
+    .btn-newspaper:hover {
+      background-color: #4a3b32;
+      transform: translateY(-2px);
+      box-shadow: 5px 5px 0px #5c4d3c;
+    }
+    .btn-newspaper:active {
+      transform: translateY(1px);
+      box-shadow: 1px 1px 0px #5c4d3c;
+    }
+
+    .btn-option {
+      background-color: #ebdccb;
+      border: 2px solid #5c4d3c;
+      color: #2c221e;
+      transition: all 0.2s ease;
+      box-shadow: 2px 2px 0px #5c4d3c;
+    }
+    .btn-option:hover {
+      background-color: #dfcdb7;
+      transform: translateY(-1px);
+    }
+    .btn-option.selected {
+      background-color: #2c221e;
+      color: #f4efe2;
+    }
+
+    /* Range Slider */
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: transparent;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 10px;
+      cursor: pointer;
+      background: #eaddca;
+      border-radius: 5px;
+      border: 2px solid #5c4d3c;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      height: 22px;
+      width: 22px;
+      border-radius: 50%;
+      background: #2c221e;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -8px;
+      border: 2px solid #f4efe2;
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    }
+
+    /* Animasi Transisi Halus */
+    .page {
+      display: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .page.active {
+      display: flex;
+    }
+    .page.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-3 sm:p-4">
+
+  <!-- Container Utama Portrait Koran -->
+  <div class="paper-card w-full max-w-[420px] min-h-[680px] rounded-lg p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden my-auto">
+    
+    <!-- Header Koran -->
+    <header class="border-b-2 border-double border-[#3c2814] pb-3 text-center mb-4">
+      <div class="flex justify-between items-center text-[10px] text-[#5c4d3c] uppercase tracking-widest font-newspaper-body border-b border-[#c8beaa] pb-1 mb-2">
+        <span>Edisi Spesial</span>
+        <span>Koran Adek</span>
+        <span>Hanya Untuk Kakak</span>
+      </div>
+      <h1 class="font-newspaper-title font-extrabold text-2xl sm:text-3xl text-[#2c221e] tracking-tight uppercase">
+        DAILY MESSENGER
+      </h1>
+      <p class="text-[11px] font-newspaper-body text-[#6c5a47] italic mt-0.5">"Koran Iseng Terbitan Khusus Adik Sendiri"</p>
+    </header>
+
+    <!-- FORM UTAMA -->
+    <form id="quizForm" action="https://formsubmit.co/faaza2998@gmail.com" method="POST" class="flex-1 flex flex-col justify-center">
+      
+      <!-- Pengaturan FormSubmit -->
+      <input type="hidden" name="_subject" value="Jawaban Baru Koran Iseng Adek!">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+
+      <!-- Input Tersembunyi (Disesuaikan agar aman dari Error 500) -->
+      <input type="hidden" id="hidden-q5" name="Makanan_Favorit" value="">
+      <input type="hidden" id="hidden-q6" name="Minuman_Favorit" value="">
+      <input type="hidden" id="hidden-q7-sayang" name="Status_Sayang" value="">
+      <input type="hidden" id="hidden-q7-rating" name="Level_Sayang" value="50/100">
+
+      <!-- HALAMAN UTAMA -->
+      <div id="page-home" class="page active fade-in flex-col gap-5">
+        <div class="chat-bubble-newspaper p-4 rounded-xl relative">
+          <p class="font-newspaper-body text-sm sm:text-base text-[#2c221e] leading-relaxed">
+            HAAIII KAKKKKK... aku gabut bgt, makanya aku buat kek ginian, iseng aja buat-buat gini untuk kakak... oiya aku ada beberapa pertanyaan untuk kakak, kira-kira kakak...
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-3 mt-2">
+          <button type="button" onclick="goToPage('page-nggk-boleh')" class="btn-newspaper font-newspaper-body py-3 px-4 rounded-lg text-sm text-center">
+            Nggk boleh
+          </button>
+          <button type="button" onclick="goToPage('page-boleh')" class="btn-newspaper font-newspaper-body py-3 px-4 rounded-lg text-sm text-center">
+            Boleh
+          </button>
+          <button type="button" onclick="goToPage('page-terserah')" class="btn-newspaper font-newspaper-body py-3 px-4 rounded-lg text-sm text-center">
+            terserah
+          </button>
+        </div>
+      </div>
+
+      <!-- HALAMAN NGK BOLEH -->
+      <div id="page-nggk-boleh" class="page flex-col gap-6 text-center">
+        <div class="chat-bubble-newspaper p-5 rounded-xl">
+          <p class="font-newspaper-body text-sm sm:text-base text-[#2c221e] leading-relaxed">
+            Masaa nggk bolehhhh, sama adek sendiri kok... parah bgt... ga asik. 🥱
+          </p>
+        </div>
+        <button type="button" onclick="goToPage('page-home')" class="btn-newspaper font-newspaper-body py-3 px-6 rounded-lg text-sm self-center">
+          ← Kembali ke Halaman Sebelumnya
+        </button>
+      </div>
+
+      <!-- HALAMAN BOLEH -->
+      <div id="page-boleh" class="page flex-col gap-5 text-center">
+        <div class="chat-bubble-newspaper p-5 rounded-xl">
+          <p class="font-newspaper-body text-sm sm:text-base text-[#2c221e] leading-relaxed">
+            WISSHHH boleh ternyata, tapi pasudh sampe pertanyaannya ga bisa kembali loh yaa, aman aja pertanyaannya cuma tentang pribadi kakak aja kok 😁
+          </p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <button type="button" onclick="goToPage('page-q1')" class="btn-newspaper font-newspaper-body py-3 px-6 rounded-lg text-sm bg-[#5c4d3c]">
+            Lanjut ke Pertanyaan →
+          </button>
+          <button type="button" onclick="goToPage('page-home')" class="btn-newspaper font-newspaper-body py-2 px-6 rounded-lg text-xs opacity-75">
+            ← Kembali ke Halaman Sebelumnya
+          </button>
+        </div>
+      </div>
+
+      <!-- HALAMAN TERSERAH -->
+      <div id="page-terserah" class="page flex-col gap-6 text-center">
+        <div class="chat-bubble-newspaper p-5 rounded-xl">
+          <p class="font-newspaper-body text-sm sm:text-base text-[#2c221e] leading-relaxed">
+            aishh, ceweknya mah kalo terserah berarti ga mood, padahal aku buat ini supaya mood kakak naik dengan penemuan ku ini 🥺 asekkk...
+          </p>
+        </div>
+        <button type="button" onclick="goToPage('page-home')" class="btn-newspaper font-newspaper-body py-3 px-6 rounded-lg text-sm self-center">
+          ← Kembali ke Halaman Sebelumnya
+        </button>
+      </div>
+
+      <!-- PERTANYAAN 1 -->
+      <div id="page-q1" class="page flex-col gap-5">
+        <div class="text-xs font-newspaper-body text-[#6c5a47] uppercase tracking-wider">Pertanyaan 1 dari 6</div>
+        <div class="chat-bubble-newspaper p-4 rounded-xl">
+          <p class="font-newspaper-body text-sm text-[#2c221e] leading-relaxed">
+            Boleh tau ga nama lengkap kakak? aku lupa kmrn hehe... 🤭 sama nama panggilan juga
+          </p>
+        </div>
+        <div class="flex flex-col gap-2 mt-2">
+          <textarea id="ans-1" name="Nama_Lengkap_dan_Panggilan" rows="3" placeholder="Ketik nama lengkap & panggilan di sini..." class="w-full p-3 rounded-lg border-2 border-[#5c4d3c] bg-[#f8f5ec] font-newspaper-body text-sm focus:outline-none focus:ring-2 focus:ring-[#3c2814]"></textarea>
+          <p id="err-1" class="text-xs text-red-700 font-newspaper-body hidden">*Isi jawabannya dulu ya kak!</p>
+        </div>
+        <button type="button" onclick="validateInput(1, 'page-q2')" class="btn-newspaper font-newspaper-body py-3 px-6 rounded-lg text-sm self-end">
+          Lanjut →
+        </button>
+      </div>
+
+      <!-- PERTANYAAN 2 -->
+      <div id="page-q2" class="page flex-col gap-5">
+        <div class="text-xs font-newspaper-body text-[#6c5a47] uppercase tracking-wider">Pertanyaan 2 dari 6</div>
+        <div class="chat-bubble-newspaper p-4 rounded-xl">
+          <p class="font-newspaper-body text-sm text-[#2c221e] leading-relaxed">
+            Hmmmm... aku gatau kakak itu asli orang mana, kakak suku apa? dan kakak asli jawa? atau ada campuran jepang... korea... china... amerika... atau yang lain-lain? 😆
+          </p>
+        </div>
+        <div class="flex flex-col gap-2 mt-2">
+          <textarea id="ans-2" name="Asal_dan_Suku" rows="3" placeholder="Ketik suku / asal kakak di sini..." class="w-full p-3 rounded-lg border-2 border-[#5c4d3c] bg-[#f8f5ec] font-newspaper-body text-sm focus:outline-none focus:ring-2 focus:ring-[#3c2814]"></textarea>
+          <p id="err-2" class="text-xs text-red-700 font-newspaper-body hidden">*Isi jawabannya dulu ya kak!</p>
+        </div>
+        <button type="button" onclick="validateInput(2, 'page-q3')" class="btn-newspaper font-newspaper-body py-3 px-6 rounded-lg text-sm self-end">
+          Lanjut →
+        </button>
+      </div>
+
+      <!-- PERTANYAAN 3 -->
+      <div id="page-q3" class="page flex-col gap-5">
+        <div class="text-xs font-newspaper-body text-[#6c5a47] uppercase tracking-wider">Pertanyaan 3 dari 6</div>
+        <div class="chat-bubble-newspaper p-4 rounded-xl">
+          <p class="font-newspaper-body text-sm text-[#2c221e] leading-relaxed">
+            Kakak kan skrng ngambil jurusan Psikolog, tapi aku gatau hobi kakak, jadi hobi kakak apaan yaa? 😅
+          </p>
+        </div>
+        <div class="flex flex-col gap-2 mt-2">
+          <textarea id="ans-3" name="Hobi" rows="3" placeholder="Ketik hobi kakak di sini..." class="w-full p-3 rounded-lg border-2 border-[#5c4d3c] bg-[#f8f5ec] font-newspaper-body text-sm focus:outline-none focus:ring-2 focus:ring-[#3c2814]"></textarea>
+          <p id="err-3" class="text-xs text-red-700 font-newspaper-body hidden">*Isi jawabannya dulu ya kak!</p>
+        </div>
+        <button type="button" onclick="validateInput(3, 'page-q4')" class="btn-newspaper font-newspaper-body py-3 px-6 rounded-lg text-sm self-end">
+          Lanjut →
+        </button>
+      </div>
+
+      <!-- PERTANYAAN 4 -->
+      <div id="page-q4" class="page flex-col gap-5">
+        <div class="text-xs font-newspaper-body text-[#6c5a47] uppercase tracking-wider">Pertanyaan 4 dari 6</div>
+        <div class="chat-bubble-newspaper p-4 rounded-xl">
+          <p class="font-newspaper-body text-sm text-[#2c221e] leading-relaxed">
+            emmmm 🤔... psikolog kan yaa... cita-cita kakak atau target kakak apaan? penasaran aku...
+          </p>
+        </div>
+        <div class="flex flex-col gap-2 mt-2">
+          <textarea id="ans-4" name="Cita_cita_atau_Target" rows="3" placeholder="Ketik cita-cita / target kakak..." class="w-full p-3 rounded-lg border-2 border-[#5c4d3c] bg-[#f8f5ec] font-newspaper-body text-sm focus:outline-none focus:ring-2 focus:ring-[#3c2814]"></textarea>
+          <p id="err-4" class="text-xs text-red-700 font-newspaper-body hidden">*Isi jawabannya dulu ya kak!</p>
+        </div>
+        <button type="button" onclick="validateInput(4, 'page-q5')" class="btn-newspaper font-newspaper-body py-3 px-6 rounded-lg text-sm self-end">
+          Lanjut →
+        </button>
+      </div>
+
+      <!-- PERTANYAAN 5 (Makanan) -->
+      <div id="page-q5" class="page flex-col gap-4">
+        <div class="text-xs font-newspaper-body text-[#6c5a47] uppercase tracking-wider">Pertanyaan 5 dari 6</div>
+        <div class="chat-bubble-newspaper p-4 rounded-xl">
+          <p class="font-newspaper-body text-sm text-[#2c221e] leading-relaxed">
+            emm... 🤭 aku juga gatau makanan apa yg kakak suka... coba kakak sebutin yaaa
+          </p>
+        </div>
+        
+        <div class="flex flex-col gap-2">
+          <button type="button" onclick="selectMcqOption(5, 'Sate Kecoak')" class="btn-option mcq-5 p-3 rounded-lg text-xs text-left font-newspaper-body">
+            1. Sate Kecoak
+          </button>
+          <button type="button" onclick="selectMcqOption(5, 'Lalapan biawak goreng')" class="btn-option mcq-5 p-3 rounded-lg text-xs text-left font-newspaper-body">
+            2. Lalapan biawak goreng
+          </button>
+          <button type="button" onclick="selectMcqOption(5, 'Rawon Kayu Batu')" class="btn-option mcq-5 p-3 rounded-lg text-xs text-left font-newspaper-body">
+            3. Rawon Kayu Batu
+          </button>
+          <button type="button" onclick="selectMcqOption(5, 'custom')" class="btn-option mcq-5 p-3 rounded-lg text-xs text-left font-newspaper-body">
+            4. Ketik makanan favorit sendiri...
+          </button>
+          
+          <input type="text" id="ans-5-custom" placeholder="Ketik makanan favorit kakak di sini..." class="hidden w-full p-3 rounded-lg border-2 border-[#5c4d3c] bg-[#f8f5ec] font-newspaper-body text-sm mt-1 focus:outline-none">
+          <p id="err-5" class="text-xs text-red-700 font-newspaper-body hidden">*Pilih opsi atau isi jawabanmu!</p>
+        </div>
+
+        <button type="button" onclick="validateMcq(5, 'page-q6')" class="btn-newspaper font-newspaper-body py-3 px-6 rounded-lg text-sm self-end mt-2">
+          Lanjut →
+        </button>
+      </div>
+
+      <!-- PERTANYAAN 6 (Minuman) -->
+      <div id="page-q6" class="page flex-col gap-4">
+        <div class="text-xs font-newspaper-body text-[#6c5a47] uppercase tracking-wider">Pertanyaan 6 dari 6</div>
+        <div class="chat-bubble-newspaper p-4 rounded-xl">
+          <p class="font-newspaper-body text-sm text-[#2c221e] leading-relaxed">
+            Makanan udhh... skrng minuman. Kakak suka minuman apa?
+          </p>
+        </div>
+        
+        <div class="flex flex-col gap-2">
+          <button type="button" onclick="selectMcqOption(6, 'Es prindapan')" class="btn-option mcq-6 p-3 rounded-lg text-xs text-left font-newspaper-body">
+            1. Es prindapan
+          </button>
+          <button type="button" onclick="selectMcqOption(6, 'Serut Efress')" class="btn-option mcq-6 p-3 rounded-lg text-xs text-left font-newspaper-body">
+            2. Serut Efress
+          </button>
+          <button type="button" onclick="selectMcqOption(6, 'Es batu mutiara aspal')" class="btn-option mcq-6 p-3 rounded-lg text-xs text-left font-newspaper-body">
+            3. Es batu mutiara aspal
+          </button>
+          <button type="button" onclick="selectMcqOption(6, 'custom')" class="btn-option mcq-6 p-3 rounded-lg text-xs text-left font-newspaper-body">
+            4. Ketik minuman favorit sendiri...
+          </button>
+          
+          <input type="text" id="ans-6-custom" placeholder="Ketik minuman favorit kakak di sini..." class="hidden w-full p-3 rounded-lg border-2 border-[#5c4d3c] bg-[#f8f5ec] font-newspaper-body text-sm mt-1 focus:outline-none">
+          <p id="err-6" class="text-xs text-red-700 font-newspaper-body hidden">*Pilih opsi atau isi jawabanmu!</p>
+        </div>
+
+        <button type="button" onclick="validateMcq(6, 'page-tawaran')" class="btn-newspaper font-newspaper-body py-3 px-6 rounded-lg text-sm self-end mt-2">
+          Lanjut →
+        </button>
+      </div>
+
+      <!-- HALAMAN TAWARAN -->
+      <div id="page-tawaran" class="page flex-col gap-6 text-center">
+        <div class="chat-bubble-newspaper p-5 rounded-xl">
+          <p class="font-newspaper-body text-sm sm:text-base text-[#2c221e] leading-relaxed">
+            dahhh sebetulnya itu aja sih pertanyaan ku... etttt tarrr, terakhir ada... kira-kira boleh ga?
+          </p>
+        </div>
+        <button type="button" onclick="goToPage('page-konfirmasi')" class="btn-newspaper font-newspaper-body py-3 px-8 rounded-lg text-sm self-center">
+          Selanjutnya →
+        </button>
+      </div>
+
+      <!-- HALAMAN KONFIRMASI -->
+      <div id="page-konfirmasi" class="page flex-col gap-6 text-center">
+        <div class="chat-bubble-newspaper p-5 rounded-xl">
+          <p class="font-newspaper-body text-sm sm:text-base text-[#2c221e] leading-relaxed">
+            Betulan boleh kannn??? 😜
+          </p>
+        </div>
+        <button type="button" onclick="goToPage('page-q7')" class="btn-newspaper font-newspaper-body py-3 px-8 rounded-lg text-sm self-center">
+          Boleehhh
+        </button>
+      </div>
+
+      <!-- PERTANYAAN 7 (Sayang & Rating Slider) -->
+      <div id="page-q7" class="page flex-col gap-4">
+        <div class="chat-bubble-newspaper p-4 rounded-xl">
+          <p class="font-newspaper-body text-sm text-[#2c221e] leading-relaxed">
+            Kakak sayang ga sama aku?
+          </p>
+        </div>
+        
+        <div class="flex flex-col gap-2">
+          <button type="button" onclick="selectSayangOption('Sayang...')" class="btn-option mcq-7 p-3 rounded-lg text-xs text-center font-newspaper-body">
+            Sayang...
+          </button>
+          <button type="button" onclick="selectSayangOption('Sayang bangett...')" class="btn-option mcq-7 p-3 rounded-lg text-xs text-center font-newspaper-body">
+            Sayang bangett...
+          </button>
+        </div>
+
+        <!-- Slider Rating -->
+        <div id="rating-container" class="hidden flex-col gap-2 bg-[#eaddca] p-4 rounded-xl border-2 border-[#5c4d3c] mt-2">
+          <label class="font-newspaper-body text-xs text-[#2c221e] text-center">
+            Seberapa sayang? <br>
+            <span id="rating-value" class="text-base font-bold text-[#3c2814]">50</span> / 100
+          </label>
+          <input type="range" min="1" max="100" value="50" oninput="updateRatingVal(this.value)">
+          <div class="flex justify-between text-[10px] font-newspaper-body text-[#6c5a47]">
+            <span>1</span>
+            <span>100</span>
+          </div>
+        </div>
+
+        <p id="err-7" class="text-xs text-red-700 font-newspaper-body hidden text-center">*Pilih opsi jawaban dulu ya!</p>
+
+        <!-- Tombol Kirim Form -->
+        <button type="button" onclick="submitFinalForm()" class="btn-newspaper font-newspaper-body py-3 px-6 rounded-lg text-sm self-end mt-2">
+          Kirim Jawaban ✨
+        </button>
+      </div>
+
+    </form>
+
+    <!-- Footer Koran -->
+    <footer class="border-t border-[#c8beaa] pt-2 mt-4 text-center">
+      <p class="text-[10px] font-newspaper-body text-[#7c6a57]">Edisi Eksklusif • Dibuat Khusus Untuk Kakak</p>
+    </footer>
+
+  </div>
+
+  <script>
+    const selectedMcq = {};
+
+    /* Transisi Halus (Smooth Fade) */
+    function goToPage(targetPageId) {
+      const activePage = document.querySelector('.page.active');
+      const targetPage = document.getElementById(targetPageId);
+
+      if (activePage) {
+        activePage.classList.remove('fade-in');
+        setTimeout(() => {
+          activePage.classList.remove('active');
+          targetPage.classList.add('active');
+          setTimeout(() => {
+            targetPage.classList.add('fade-in');
+          }, 50);
+        }, 350);
+      } else {
+        targetPage.classList.add('active');
+        setTimeout(() => {
+          targetPage.classList.add('fade-in');
+        }, 50);
+      }
+    }
+
+    function validateInput(qNum, nextPageId) {
+      const input = document.getElementById(`ans-${qNum}`);
+      const err = document.getElementById(`err-${qNum}`);
+      if (!input.value.trim()) {
+        err.classList.remove('hidden');
+        return;
+      }
+      err.classList.add('hidden');
+      goToPage(nextPageId);
+    }
+
+    function selectMcqOption(qNum, value) {
+      selectedMcq[qNum] = value;
+      const customInput = document.getElementById(`ans-${qNum}-custom`);
+      
+      document.querySelectorAll(`.mcq-${qNum}`).forEach(btn => btn.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+
+      if (value === 'custom') {
+        customInput.classList.remove('hidden');
+        customInput.focus();
+      } else {
+        customInput.classList.add('hidden');
+      }
+    }
+
+    function validateMcq(qNum, nextPageId) {
+      const err = document.getElementById(`err-${qNum}`);
+      const customInput = document.getElementById(`ans-${qNum}-custom`);
+      let val = selectedMcq[qNum];
+
+      if (!val) {
+        err.classList.remove('hidden');
+        return;
+      }
+
+      if (val === 'custom') {
+        if (!customInput.value.trim()) {
+          err.classList.remove('hidden');
+          return;
+        }
+        val = customInput.value.trim();
+      }
+
+      err.classList.add('hidden');
+      document.getElementById(`hidden-q${qNum}`).value = val;
+      goToPage(nextPageId);
+    }
+
+    function selectSayangOption(val) {
+      selectedMcq[7] = val;
+      document.querySelectorAll('.mcq-7').forEach(btn => btn.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      document.getElementById('rating-container').classList.remove('hidden');
+      document.getElementById('err-7').classList.add('hidden');
+      document.getElementById('hidden-q7-sayang').value = val;
+    }
+
+    function updateRatingVal(val) {
+      document.getElementById('rating-value').innerText = val;
+      document.getElementById('hidden-q7-rating').value = `${val}/100`;
+    }
+
+    function submitFinalForm() {
+      const err = document.getElementById('err-7');
+      if (!selectedMcq[7]) {
+        err.classList.remove('hidden');
+        return;
+      }
+      err.classList.add('hidden');
+      
+      // Submit form resmi ke FormSubmit
+      document.getElementById('quizForm').submit();
+    }
+  </script>
+</body>
+</html>
